@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DrivingLicenseExam.Core.Entities;
+namespace DrivingLicenseExam.Infrastructure.Entities;
 
 public class BaseEntity
 {

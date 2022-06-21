@@ -1,4 +1,4 @@
-﻿namespace DrivingLicenseExam.Core.Entities;
+﻿namespace DrivingLicenseExam.Infrastructure.Entities;
 
 public class Question : BaseEntity
 {

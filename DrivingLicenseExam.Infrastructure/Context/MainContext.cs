@@ -1,4 +1,4 @@
-﻿using DrivingLicenseExam.Core.Entities;
+﻿using DrivingLicenseExam.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DrivingLicenseExam.Infrastructure.Context;
@@ -8,6 +8,7 @@ public class MainContext : DbContext
     public DbSet<Image> Image { get; set; }
     public DbSet<Question> Question { get; set; }
     public DbSet<User> User { get; set; }
+    public DbSet<Answer> Answer { get; set; }
 
     public MainContext()
     {
