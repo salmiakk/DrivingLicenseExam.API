@@ -28,7 +28,9 @@ public class MainContext : DbContext
             .HasOne(x => x.Image)
             .WithOne(x => x.Question)
             .OnDelete(DeleteBehavior.Cascade);
-        modelBuilder.Entity<YesNoQuestion>();
-        modelBuilder.Entity<MultipleChoiceQuestion>();
+        modelBuilder.Entity<Question>()
+            .HasMany(x => x.Answers)
+            .WithOne(x => x.Question)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

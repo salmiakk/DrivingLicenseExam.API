@@ -1,7 +1,10 @@
 ﻿namespace DrivingLicenseExam.Core.Entities;
 
-public abstract class Question : BaseEntity
+public class Question : BaseEntity
 {
     public string Content { get; set; }
     public Image Image { get; set; }
+    
+    public IEnumerable<Answer> Answers { get; set; }
+    
 }
