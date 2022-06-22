@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DrivingLicenseExam.Core\DrivingLicenseExam.Core.csproj" />
       <ProjectReference Include="..\DrivingLicenseExam.Infrastructure\DrivingLicenseExam.Infrastructure.csproj" />
     </ItemGroup>
 
