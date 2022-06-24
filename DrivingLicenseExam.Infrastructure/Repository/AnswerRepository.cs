@@ -15,7 +15,7 @@ public class AnswerRepository : IAnswerRepository
         _mainContext = mainContext;
     }
 
-    public async Task<IEnumerable<Answer>> GetAll()
+    public async Task<IEnumerable<Answer>> GetAllAsync()
     {
         var answers = await _mainContext.Answer.ToListAsync();
         foreach (var answer in answers)
@@ -26,7 +26,7 @@ public class AnswerRepository : IAnswerRepository
         return answers;
     }
 
-    public async Task<Answer> GetById(int id)
+    public async Task<Answer> GetByIdAsync(int id)
     {
         var answer = await _mainContext.Answer.SingleOrDefaultAsync(x => x.Id == id);
         if (answer != null)
@@ -38,14 +38,14 @@ public class AnswerRepository : IAnswerRepository
         throw new EntityNotFoundException();
     }
 
-    public async Task Add(Answer entity)
+    public async Task AddAsync(Answer entity)
     {
         entity.DateOfCreation = DateTime.UtcNow;
         await _mainContext.AddAsync(entity);
         await _mainContext.SaveChangesAsync();
     }
 
-    public async Task Update(Answer entity)
+    public async Task UpdateAsync(Answer entity)
     {
         var answerToUpdate = await _mainContext.Answer.SingleOrDefaultAsync(x => x.Id == entity.Id);
         if (answerToUpdate == null)

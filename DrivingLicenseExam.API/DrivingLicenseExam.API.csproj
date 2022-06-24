@@ -22,8 +22,4 @@
       <ProjectReference Include="..\DrivingLicenseExam.Infrastructure\DrivingLicenseExam.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
 </Project>

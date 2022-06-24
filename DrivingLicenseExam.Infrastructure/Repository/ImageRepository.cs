@@ -12,22 +12,22 @@ public class ImageRepository : IImageRepository
         _mainContext = mainContext;
     }
     
-    public async Task<IEnumerable<Image>> GetAll()
+    public async Task<IEnumerable<Image>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Image> GetById(int id)
+    public async Task<Image> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task Add(Image entity)
+    public async Task AddAsync(Image entity)
     {
         throw new NotImplementedException();
     }
 
-    public async Task Update(Image entity)
+    public async Task UpdateAsync(Image entity)
     {
         throw new NotImplementedException();
     }

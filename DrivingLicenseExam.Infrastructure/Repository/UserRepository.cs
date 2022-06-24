@@ -12,22 +12,22 @@ public class UserRepository : IUserRepository
         _mainContext = mainContext;
     }
 
-    public async Task<IEnumerable<User>> GetAll()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<User> GetById(int id)
+    public async Task<User> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task Add(User entity)
+    public async Task AddAsync(User entity)
     {
         throw new NotImplementedException();
     }
 
-    public async Task Update(User entity)
+    public async Task UpdateAsync(User entity)
     {
         throw new NotImplementedException();
     }

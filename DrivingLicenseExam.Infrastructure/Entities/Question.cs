@@ -6,5 +6,5 @@ public class Question : BaseEntity
     public Image Image { get; set; }
     
     public IEnumerable<Answer> Answers { get; set; }
-    
+
 }
