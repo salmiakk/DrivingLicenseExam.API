@@ -2,16 +2,19 @@
 using DrivingLicenseExam.Infrastructure.Entities;
 using DrivingLicenseExam.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DrivingLicenseExam.Infrastructure.Repository;
 
 public class QuestionRepository : IQuestionRepository
 {
-    public readonly MainContext _mainContext;
+    private readonly MainContext _mainContext;
+    private readonly ILogger<IQuestionRepository> _logger;
 
-    public QuestionRepository(MainContext mainContext)
+    public QuestionRepository(MainContext mainContext, ILogger<IQuestionRepository> logger)
     {
         _mainContext = mainContext;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<Question>> GetAllAsync()
@@ -36,7 +39,7 @@ public class QuestionRepository : IQuestionRepository
             await _mainContext.Entry(question).Collection<Answer>(x => x.Answers).LoadAsync();
             return question;
         }
-
+        _logger.LogError("Cannot find question with provided id: {QuestionId}", id);
         throw new EntityNotFoundException();
     }
 
@@ -53,6 +56,7 @@ public class QuestionRepository : IQuestionRepository
         
         if (questionsToUpdate == null)
         {
+            _logger.LogError("Cannot find question with provided id: {QuestionId}", entity.Id);
             throw new EntityNotFoundException();
         }
         
@@ -77,6 +81,7 @@ public class QuestionRepository : IQuestionRepository
         }
         else
         {
+            _logger.LogError("Cannot find question with provided id: {QuestionId}", id);
             throw new EntityNotFoundException();
         }
 

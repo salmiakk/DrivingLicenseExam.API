@@ -1,6 +1,6 @@
 ﻿namespace DrivingLicenseExam.Core.DTO;
 
-public class UserUpdateRequest
+public class UserUpdateRequestDto
 {
     public int ExistingUserId { get; set; }
     
@@ -8,7 +8,7 @@ public class UserUpdateRequest
     public string Surname { get; set; }
     public string Email { get; set; }
 
-    public UserUpdateRequest(int existingUserId, string firstName, string surname, string email)
+    public UserUpdateRequestDto(int existingUserId, string firstName, string surname, string email)
     {
         ExistingUserId = existingUserId;
         FirstName = firstName;

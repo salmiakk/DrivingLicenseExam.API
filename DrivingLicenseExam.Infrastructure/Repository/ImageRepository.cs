@@ -5,7 +5,7 @@ namespace DrivingLicenseExam.Infrastructure.Repository;
 
 public class ImageRepository : IImageRepository
 {
-    public readonly MainContext _mainContext;
+    private readonly MainContext _mainContext;
 
     public ImageRepository(MainContext mainContext)
     {

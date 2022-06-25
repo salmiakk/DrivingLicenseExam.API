@@ -8,7 +8,7 @@ namespace DrivingLicenseExam.Infrastructure.Repository;
 
 public class AnswerRepository : IAnswerRepository
 {
-    public readonly MainContext _mainContext;
+    private readonly MainContext _mainContext;
 
     public AnswerRepository(MainContext mainContext)
     {
