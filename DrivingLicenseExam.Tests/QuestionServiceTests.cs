@@ -1,7 +1,6 @@
 ﻿using DrivingLicenseExam.Core.DTO;
 using DrivingLicenseExam.Core.Services;
 using DrivingLicenseExam.Infrastructure.Entities;
-using DrivingLicenseExam.Infrastructure.Exceptions;
 using DrivingLicenseExam.Infrastructure.Repository;
 using FluentAssertions;
 using Moq;
@@ -83,14 +82,14 @@ public class QuestionServiceTests
         
         var sut = new QuestionService(questionRepositoryMock.Object);
         
-        var result = sut.DeleteExistingQuestionByIdAsync(2);
+        var result =  sut.DeleteExistingQuestionByIdAsync(2);
         
         questionRepositoryMock.Verify(x=> x.DeleteById(2));
 
     }
 
     [Fact]
-    public async Task AddNewQuestionAsync_ShouldInvokeRepositoryAdd_WhenGivenQuestionDtoParameter()
+    public async Task AddNewQuestionAsync_ShouldInvokeRepositoryAdd_WhenGivenQuestionCreationDtoParameter()
     {
         var questionRepositoryMock = new Moq.Mock<IQuestionRepository>();
 
@@ -109,4 +108,23 @@ public class QuestionServiceTests
         questionRepositoryMock.Verify(x=> x.AddAsync(It.IsAny<Question>()));
     }
 
+    [Fact]
+    public async Task UpdateExistingQuestionAsync_ShouldInvokeRepositoryUpdate_WhenGivenQuestionUpdateDtoParameter()
+    {
+        var questionRepositoryMock = new Moq.Mock<IQuestionRepository>();
+
+        questionRepositoryMock.Setup(x => x.UpdateAsync(It.IsAny<Question>()));
+        
+        var sut = new QuestionService(questionRepositoryMock.Object);
+        
+        var dto = new QuestionUpdateRequestDto(1, new QuestionCreationRequestDto(answers: new List<AnswerCreationRequestDto>
+        {
+            new(content: "50km/h", isCorrect: true, questionId: 1),
+            new(content: "60km/h", isCorrect: false, questionId: 1)
+        },content: "Jaka jest maksymalna dozwolona predkosc w obszarze zabudowanym?" , image: new ImageBasicRequestDto(data: new byte[] { 0, 1, 0 })));
+        
+        var result = sut.UpdateExistingQuestionAsync(dto);
+        
+        questionRepositoryMock.Verify(x=> x.UpdateAsync(It.IsAny<Question>()));
+    }
 }
