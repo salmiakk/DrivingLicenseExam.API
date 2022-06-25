@@ -14,4 +14,10 @@ public class QuestionCreationRequestDto
         Image = image;
         Answers = answers;
     }
+
+    public QuestionCreationRequestDto(IEnumerable<AnswerCreationRequestDto> answers, ImageBasicRequestDto image)
+    {
+        Answers = answers;
+        Image = image;
+    }
 }
