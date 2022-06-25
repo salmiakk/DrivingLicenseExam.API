@@ -19,7 +19,11 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task<IEnumerable<Question>> GetAllAsync()
     {
+        _logger.LogInformation("Loading all questions");
+
         var questions = await _mainContext.Question.ToListAsync();
+        if(questions.Count == 0) _logger.LogWarning("There are no registered questions");
+
         foreach (var question in questions)
         {
             await _mainContext.Entry(question).Reference(x => x.Image).LoadAsync();
@@ -31,6 +35,8 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task<Question> GetByIdAsync(int id)
     {
+        _logger.LogInformation("Loading question with id {QuestionId}", id);
+
         var question = await _mainContext.Question.SingleOrDefaultAsync(x => x.Id == id);
 
         if (question != null)
@@ -45,6 +51,8 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task AddAsync(Question entity)
     {
+        _logger.LogInformation("Adding question with id {questionId}", entity.Id);
+
         entity.DateOfCreation = DateTime.UtcNow;
         await _mainContext.AddAsync(entity);
         await _mainContext.SaveChangesAsync();
@@ -52,6 +60,8 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task UpdateAsync(Question entity)
     {
+        _logger.LogInformation("Updating question with id {questionId}", entity.Id);
+
         var questionsToUpdate = await _mainContext.Question.SingleOrDefaultAsync(x => x.Id == entity.Id);
         
         if (questionsToUpdate == null)
@@ -73,6 +83,8 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task DeleteById(int id)
     {
+        _logger.LogInformation("Deleting question with id {questionId}",id);
+
         var questionsToDelete = await _mainContext.Question.SingleOrDefaultAsync(x => x.Id == id);
         if (questionsToDelete != null)
         {
