@@ -4,29 +4,30 @@ using DrivingLicenseExam.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DrivingLicenseExam.API.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
-public class QuestionController : ControllerBase
+public class UserController : ControllerBase
 {
-    private readonly IQuestionService _questionService;
+    private readonly IUserService _userService;
 
-    public QuestionController(IQuestionService questionService)
+    public UserController(IUserService userService)
     {
-        _questionService = questionService;
+        _userService = userService;
     }
-
+    
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()
     {
-        return Ok(await _questionService.GetAllQuestionsBasicInfoAsync());
+        return Ok(await _userService.GetAllUsersBasicInfoAsync());
     }
-    
+
     [HttpPost("Create")]
-    public async Task<IActionResult> AddNewQuestion([FromBody] QuestionCreationRequestDto dto)
+    public async Task<IActionResult> AddNewUser([FromBody] UserBasicRequestDto dto)
     {
         try
         {
-            await _questionService.AddNewQuestionAsync(dto);
+            await _userService.AddNewUserAsync(dto);
         }
         catch (EntityNotFoundException e)
         {
@@ -36,11 +37,12 @@ public class QuestionController : ControllerBase
     }
 
     [HttpPut("Update")]
-    public async Task<IActionResult> UpdateExistingQuestion([FromBody] QuestionUpdateRequestDto dto)
+    public async Task<IActionResult> UpdateExisitingUser([FromBody] UserUpdateRequestDto dto)
     {
         try
         {
-            await _questionService.UpdateExistingQuestionAsync(dto);
+            await _userService.UpdateExistingUserAsync(dto);
+
         }
         catch (EntityNotFoundException e)
         {
@@ -50,11 +52,11 @@ public class QuestionController : ControllerBase
     }
 
     [HttpDelete("Delete")]
-    public async Task<IActionResult> DeleteExistingQuestionById([FromQuery] int id)
+    public async Task<IActionResult> DeleteExistingUserById([FromQuery] int id)
     {
         try
         {
-            await _questionService.DeleteExistingQuestionByIdAsync(id);
+            await _userService.DeleteExistingUserByIdAsync(id);
         }
         catch (EntityNotFoundException e)
         {
